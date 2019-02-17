@@ -13,12 +13,12 @@ Create a principal. In this case, we have zookeeper running as user ubuntu.
 Note: make sure you specify the internal DNS name of the kafka broker here to ensure the forward and reverse DNS lookups provide matching values. If you provide the external address, then reverse DNS lookups will not return correctly.
 
 ```
-sudo kadmin.local -q "add_principal -randkey ubuntu/ip-172-31-1-177.us-east-2.compute.internal@KAFKA.SECURE"
+sudo kadmin.local -q "add_principal -randkey ubuntu/<your kafka internal DNS server>@KAFKA.SECURE"
 ```
 
 Now export those principals into a zookeeper keytab file.
 ```
-sudo kadmin.local -q "xst -kt /tmp/zookeeper.service.keytab ubuntu/ip-172-31-1-177.us-east-2.compute.internal@KAFKA.SECURE"
+sudo kadmin.local -q "xst -kt /tmp/zookeeper.service.keytab ubuntu/<your kafka internal DNS server>@KAFKA.SECURE"
 ```
 
 Download these keytab files to your zookeeper server.
@@ -39,7 +39,7 @@ Now login to your zookeeper server.
 
 Let's test by grabbing a ticket for the admin principal using the admin keytab.
 ```
-kinit -kt /tmp/zookeeper.service.keytab ubuntu/ip-172-31-1-177.us-east-2.compute.internal
+kinit -kt /tmp/zookeeper.service.keytab ubuntu/<your kafka internal DNS server>
 
 klist
 ```

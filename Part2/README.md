@@ -21,7 +21,7 @@ com.sun.security.auth.module.Krb5LoginModule required
 useKeyTab=true
 storeKey=true
 keyTab="/tmp/zookeeper.service.keytab"
-principal="zookeeper/ip-172-31-1-177.us-east-2.compute.internal@KAFKA.SECURE";
+principal="zookeeper/<your kafka internal DNS server>@KAFKA.SECURE";
 };
 ```
 
@@ -35,11 +35,12 @@ Client {
     useKeyTab=true
     storeKey=true
     keyTab="/tmp/zookeeper.service.keytab"
-    principal="ubuntu/ec2-18-191-7-215.us-east-2.compute.amazonaws.com@KAFKA.SECURE";
+    principal="ubuntu/<your kafka server>@KAFKA.SECURE";
 };
 ```
 
 Let's start zookeeper and Kafka with the new settings.
+
 Now if you were using systemd, you would modify the systemd scripts. In this example, we will pass it in command line.
 
 ```
